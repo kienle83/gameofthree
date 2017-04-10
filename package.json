@@ -1,0 +1,27 @@
+{
+  "name": "gameofthree",
+  "version": "1.0.0",
+  "description": "Implementation a game with two players for communicating with each other using an API",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "game",
+    "three"
+  ],
+  "author": "kienle",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "body-parser": "^1.17.1",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
+  }
+}

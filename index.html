@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Game of Three</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="app/style.css" rel="stylesheet">
+
+
+</head>
+<body ng-app="app">
+
+<br/>
+
+<div class="container" ng-controller="GameController">
+    <div class="text-center text-primary"><h2>Game of Three</h2></div> <br/>
+
+    <div class="card" id="chat-container">
+        <div class="card-header card-primary card-inverse">
+            <div class="text-white">Starting number: <strong><span id="startingNumber"></span></strong></div>
+        </div>
+
+        <br/><br/>
+
+        <div class="col-xs-10 offset-xs-1 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-4 offset-lg-4">
+            <a ng-hide="isGameStarted" href="" id="isGameStarted" ng-click="startGame()" class="btn btn-primary form-control text-white">Start Game</a>
+        </div>
+
+        <br/>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <div>Current number is<br/> <strong><span class="badge badge-primary" id="currentNumber"></span></strong></div> <hr>
+            <div class="text-danger text-center" id="whoIsWaiting"></div>
+            <div>Please adding one of {-1, 0, 1} to get to a number that is divisible by 3.</div>
+            <hr>
+
+            <button class="btn btn-default playBtn" disabled="true" ng-click="addNumber(-1)">-1</button>
+            <button class="btn btn-default playBtn" disabled="true" ng-click="addNumber(0)">0</button>
+            <button class="btn btn-default playBtn" disabled="true" ng-click="addNumber(1)">+1</button>
+        </div>
+
+        <br/>
+
+        <div class="col-xs-10 offset-xs-1 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-4 offset-lg-4">
+            <div id="gameResult" class="text-center"></div>
+            <a style="display:none" href="" id="restartGame" ng-click="restartGame()" class="btn btn-primary form-control text-white">Restart Game</a>
+        </div>
+
+        <br/>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+
+<script type="text/javascript" src="app/app.js"></script>
+
+</body>
+</html>
