@@ -30,24 +30,8 @@
         <br/>
 
         <div class="col-xs-10 offset-xs-1 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-4 offset-lg-4">
-            <a ng-hide="isGameStarted" href="" ng-click="startGame(1)" class="btn btn-primary form-control text-white isGameStarted">
-                Start Game (Human with Human)
-            </a>
-        </div>
-
-        <br/>
-
-        <div class="col-xs-10 offset-xs-1 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-4 offset-lg-4">
-            <a ng-hide="isGameStarted" href="" ng-click="startGame(2)" class="btn btn-primary form-control text-white isGameStarted">
-                Computer with Computer
-            </a>
-        </div>
-
-        <br/>
-
-        <div class="col-xs-10 offset-xs-1 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-4 offset-lg-4">
-            <a ng-hide="isGameStarted" href="" ng-click="startGame(3)" class="btn btn-primary form-control text-white isGameStarted">
-                Human with Computer
+            <a ng-hide="isGameStarted" href="" ng-click="startGame()" class="btn btn-primary form-control text-white isGameStarted">
+                Start Game
             </a>
         </div>
 
@@ -56,6 +40,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <div>Current number is<br/> <strong><span class="badge badge-primary" id="currentNumber"></span></strong></div> <hr>
             <div class="text-danger text-center" id="whoIsWaiting"></div>
+            <input type="hidden" id="waitingPlayerName">
             <div>Please adding one of {-1, 0, 1} to get to a number that is divisible by 3.</div>
             <hr>
 

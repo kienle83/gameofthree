@@ -56,10 +56,13 @@ app.io.on('connection', (client) => {
         client.broadcast.to('game').emit('chat message', msg, player, client.id);
     });
 
+    client.on('disconnect', () => {
+        console.log('socket disconnected (%s)', client.id);
+    });
+
     client.on('close', () => {
         console.log('socket closed (%s)', client.id);
     });
-
 
 });
 
