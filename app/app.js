@@ -108,8 +108,8 @@ app.controller('GameController', function($scope) {
             return number / 3;
         } else if ((number + 1) % 3 == 0) {
             return ((number + 1) / 3);
-        } else if ((number + 1) % 3 == 0) {
-            return (number - 1) / 3 == 0
+        } else if ((number - 1) % 3 == 0) {
+            return ((number - 1) / 3);
         }
     }
 
