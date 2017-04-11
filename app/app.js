@@ -5,25 +5,42 @@ app.controller('GameController', function($scope) {
     var currentNumber;
     var whoIsWaiting;
 
+    $scope.mode = 1; // default playing mode is human with human
     $scope.isGameStarted = false;
-    $scope.iAmWaitingForOtherPlayer = false;
 
-    $scope.startGame = function() {
+    /**
+     * Start game by mode
+     * @param $mode = 1 => human with human
+     *        $mode = 2 => computer with computer
+     *        $mode = 3 => human with computer
+     */
+    $scope.startGame = function($mode) {
+
         // Generate a random number between 3 and 2147483647:
-        var startingNumber = Math.floor((Math.random() * 200) + 10);
+        var min = 10, max = 300;
+        var startingNumber = Math.floor((Math.random() * max) + min);
 
+        $scope.mode = $mode;
+        $scope.isGameStarted = true;
         $('#startingNumber').text(startingNumber);
         $('#currentNumber').text(startingNumber);
 
-        $scope.isGameStarted = true;
-        //$scope.iAmWaitingForOtherPlayer = true;
         socket.emit('chat message', startingNumber, "P1");
-        console.log('You have recently sent the number ' + startingNumber);
 
         // player 1 starts game then player 1 wait for player 2
         $('#waitingPlayerName').val("P1");
         $('#restartGame').hide();
         $('#gameResult').html('');
+        console.log('You have recently sent the number ' + startingNumber);
+
+        if ($mode == 2) { // computer with computer
+
+            computerWithComputer(startingNumber);
+
+        } else if ($mode == 3) { // human with computer
+
+        }
+
     };
 
     $scope.restartGame = function() {
@@ -59,6 +76,42 @@ app.controller('GameController', function($scope) {
         }
     };
 
+    /**
+     * Computer play auto with computer
+     * @param startingNumber
+     */
+    function computerWithComputer(startingNumber)
+    {
+        let currentNumber = startingNumber;
+
+        whoIsWaiting = $('#waitingPlayerName').val();
+        // if P1 is waiting then P2 is playing
+        playing = (whoIsWaiting == "P1") ? "P2" : "P1";
+
+        currentNumber = parseInt($('#currentNumber').text());
+
+        do {
+            currentNumber = smartDivisionByThree(currentNumber);
+            socket.emit('chat message', currentNumber, playing);
+
+        } while (currentNumber != 1);
+    }
+
+    /**
+     * Automatically -1, +0, +1 to number to divisible by 3
+     * @param number
+     * @returns integer
+     */
+    function smartDivisionByThree(number)
+    {
+        if (number % 3 == 0) {
+            return number / 3;
+        } else if ((number + 1) % 3 == 0) {
+            return ((number + 1) / 3);
+        } else if ((number + 1) % 3 == 0) {
+            return (number - 1) / 3 == 0
+        }
+    }
 
     socket.on('chat message', (number, player, clientId) => {
         currentNumber = parseInt(number);
@@ -74,7 +127,7 @@ app.controller('GameController', function($scope) {
             $('#gameResult').html('');
 
             $('#waitingPlayerName').val(player);
-            $('#isGameStarted').hide();
+            $('.isGameStarted').hide();
             $('#whoIsWaiting').html(player + ' is now waiting for you');
 
             $('.playBtn').prop('disabled', false);
